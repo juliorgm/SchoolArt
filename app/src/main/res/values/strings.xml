@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SchoolArt</string>
+    <string name="cad_aluno_titurlo">Cadastro de Aluno</string>
+    <string name="cad_aluno_nome">Informe o nome do aluno</string>
+    <string name="cad_aluno_telefone">Informe o telefone</string>
+    <string name="cad_aluno_site">Informe seu site</string>
+    <string name="cad_aluno_email">Informe seu email!</string>
+    <string name="salvar">Salvar</string>
+</resources>
