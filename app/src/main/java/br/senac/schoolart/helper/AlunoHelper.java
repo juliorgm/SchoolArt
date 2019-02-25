@@ -1,7 +1,6 @@
 package br.senac.schoolart.helper;
 
 import android.app.Activity;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 

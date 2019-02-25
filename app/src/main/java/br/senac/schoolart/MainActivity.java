@@ -5,12 +5,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import br.senac.schoolart.dao.AlunoDAO;
 import br.senac.schoolart.model.Aluno;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         listViewAlunos = findViewById(R.id.listViewAlunos);
         fabAddAluno = findViewById(R.id.fabAddAluno);
 
-
         fabAddAluno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,37 +37,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        List<Aluno> aluno = new ArrayList<>();
-        aluno.add(new Aluno("Asdrubal Mota","91980987751",
-                "asdrubal@gmail.com","rhempresa.com.br",8.6));
+        listViewAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        aluno.add(new Aluno("Maxuldeílde Venâncio","91966889911",
-                "uldi@schoolart.com","schoolart.com.br",9.3));
+            }
+        });
 
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
 
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
-        aluno.add(new Aluno("Estragobirobaldo Juvêncio","81933221155",
-                "baldo@schoolart.com","schoolart.com.br",9.8));
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        AlunoDAO alunoDAO = new AlunoDAO(this);
+        List<Aluno> aluno = alunoDAO.listaTodosAlunos();
 
         ArrayAdapter<Aluno> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,aluno);

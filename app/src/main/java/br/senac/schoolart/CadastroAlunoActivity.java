@@ -33,8 +33,7 @@ public class CadastroAlunoActivity extends AppCompatActivity {
                     Toast.makeText(CadastroAlunoActivity.this,
                             "Não inseriu",Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(CadastroAlunoActivity.this,
-                            "Funfou!!!!",Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
         });

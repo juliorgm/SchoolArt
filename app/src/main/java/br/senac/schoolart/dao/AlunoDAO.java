@@ -2,15 +2,19 @@ package br.senac.schoolart.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import br.senac.schoolart.model.Aluno;
 
 //SQLITE RELACIONAL
 public class AlunoDAO extends SQLiteOpenHelper {
     public AlunoDAO(Context context) {
-        super(context, "AgendaAlunos", null, 1);
+        super(context, "Agenda", null, 1);
     }
 
     //Chamado quando o banco de dados é criado pela primeira vez.
@@ -42,6 +46,28 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         return db.insert("alunos",null ,dados);
+    }
+
+    public List<Aluno> listaTodosAlunos(){
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "SELECT * FROM alunos";
+        Cursor cursor = db.rawQuery(sql,null);
+
+        List<Aluno> listaAlunos = new ArrayList<>();
+
+        while (cursor.moveToNext()){
+            long idAluno = cursor.getLong(cursor.getColumnIndex("idAluno"));
+            String nome = cursor.getString(cursor.getColumnIndex("nome"));
+            String telefone = cursor.getString(cursor.getColumnIndex("telefone"));
+            String email = cursor.getString(cursor.getColumnIndex("email"));
+            String site = cursor.getString(cursor.getColumnIndex("site"));
+            double nota = cursor.getDouble(cursor.getColumnIndex("nota"));
+
+            Aluno aluno = new Aluno(idAluno,nome,telefone,email,site,nota);
+            listaAlunos.add(aluno);
+        }
+
+        return listaAlunos;
     }
 }
 
