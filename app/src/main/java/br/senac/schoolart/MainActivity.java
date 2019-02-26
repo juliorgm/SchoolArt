@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         listViewAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this,EdicaoAlunoActivity.class);
+                Aluno aluno = (Aluno)parent.getItemAtPosition(position);
 
             }
         });
