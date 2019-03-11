@@ -15,16 +15,19 @@ public class AlunoHelper {
     private EditText txtEmail;
     private EditText txtSite;
     private RatingBar rbarNota;
+    private Aluno aluno;
 
     public AlunoHelper(CadastroAlunoActivity activity) {
-        carregaCampos(activity);
+        carregaCampos(activity, new Aluno());
     }
 
-    public AlunoHelper(EdicaoAlunoActivity activity) {
-       carregaCampos(activity);
+    public AlunoHelper(EdicaoAlunoActivity activity, Aluno aluno) {
+       carregaCampos(activity, aluno);
     }
 
-    private void carregaCampos(Activity activity){
+
+    private void carregaCampos(Activity activity, Aluno aluno){
+        this.aluno = aluno;
         txtNome = activity.findViewById(R.id.cadAlunoTxtNome);
         txtTelefone = activity.findViewById(R.id.cadAlunoTxtTelefone);
         txtEmail = activity.findViewById(R.id.cadAlunoTxtEmail);
@@ -32,6 +35,14 @@ public class AlunoHelper {
         rbarNota = activity.findViewById(R.id.rbarNota);
     }
 
+    public void carregaCampos(Aluno aluno){
+        this.aluno = aluno;
+        txtNome.setText(aluno.getNome());
+        txtTelefone.setText(aluno.getTelefone());
+        txtEmail.setText(aluno.getEmail());
+        txtSite.setText(aluno.getSite());
+        rbarNota.setRating((float)aluno.getNota());
+    }
     public Aluno getAluno() {
         String nome = txtNome.getText().toString();
         String telefone = txtTelefone.getText().toString();
@@ -39,6 +50,31 @@ public class AlunoHelper {
         String site = txtSite.getText().toString();
         double nota = rbarNota.getRating();
 
-        return new Aluno(nome, telefone, email, site,nota);
+        return new Aluno(aluno.getIdAluno(),nome, telefone, email, site,nota);
+    }
+
+    public boolean validaCamposVazios(){
+        boolean validar = true;
+        if (txtNome.getText().toString().isEmpty()) {
+            txtNome.setError("Por favor informe o nome!");
+            validar = false;
+        }
+
+        if (txtTelefone.getText().toString().isEmpty()) {
+            txtTelefone.setError("Por favor informe o telefone!");
+            validar = false;
+        }
+
+        if (txtEmail.getText().toString().isEmpty()) {
+            txtEmail.setError("Por favor informe o email!");
+            validar = false;
+        }
+
+        if (txtSite.getText().toString().isEmpty()) {
+            txtSite.setError("Por favor informe o site!");
+            validar = false;
+        }
+
+        return validar;
     }
 }

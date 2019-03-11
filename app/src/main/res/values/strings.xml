@@ -6,4 +6,5 @@
     <string name="cad_aluno_site">Informe seu site</string>
     <string name="cad_aluno_email">Informe seu email!</string>
     <string name="salvar">Salvar</string>
+    <string name="btn_excluir">Excluir Aluno</string>
 </resources>

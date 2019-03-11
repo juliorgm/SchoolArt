@@ -37,15 +37,20 @@ public class AlunoDAO extends SQLiteOpenHelper {
     }
 
     public long inserir(Aluno aluno){
+        ContentValues dados = getContentValues(aluno);
+
+        SQLiteDatabase db = getWritableDatabase();
+        return db.insert("alunos",null ,dados);
+    }
+
+    private ContentValues getContentValues(Aluno aluno) {
         ContentValues dados = new ContentValues();
         dados.put("nome",aluno.getNome());
         dados.put("telefone",aluno.getTelefone());
         dados.put("email",aluno.getEmail());
         dados.put("site",aluno.getSite());
         dados.put("nota",aluno.getNota());
-
-        SQLiteDatabase db = getWritableDatabase();
-        return db.insert("alunos",null ,dados);
+        return dados;
     }
 
     public List<Aluno> listaTodosAlunos(){
@@ -66,8 +71,30 @@ public class AlunoDAO extends SQLiteOpenHelper {
             Aluno aluno = new Aluno(idAluno,nome,telefone,email,site,nota);
             listaAlunos.add(aluno);
         }
-
         return listaAlunos;
+    }
+
+    public int editar(Aluno aluno) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues dados = getContentValues(aluno);
+        String selection = "idAluno = ?";
+        String [] args = {String.valueOf(aluno.getIdAluno())};
+
+        int resultado = db.update("alunos",dados,selection,args);
+        db.close();
+
+        return resultado;
+    }
+
+    public int deletar(long idAluno) {
+        SQLiteDatabase db = getWritableDatabase();
+        String selection= "idAluno = ?";
+        String [] args = {String.valueOf(idAluno)};
+
+        int resultado = db.delete("alunos",selection,args);
+        db.close();
+
+        return resultado;
     }
 }
 

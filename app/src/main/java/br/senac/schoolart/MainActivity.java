@@ -17,6 +17,7 @@ import br.senac.schoolart.model.Aluno;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String MAIN_ALUNO = "aluno";
     private ListView listViewAlunos;
     private FloatingActionButton fabAddAluno;
 
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,EdicaoAlunoActivity.class);
                 Aluno aluno = (Aluno)parent.getItemAtPosition(position);
 
+                intent.putExtra(MAIN_ALUNO,aluno);
+
+                startActivity(intent);
             }
         });
 

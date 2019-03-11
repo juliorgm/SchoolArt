@@ -1,6 +1,8 @@
 package br.senac.schoolart.model;
 
-public class Aluno {
+import java.io.Serializable;
+
+public class Aluno implements Serializable {
     private long idAluno;
     private String nome;
     private String telefone;
@@ -24,6 +26,11 @@ public class Aluno {
         this.site = site;
         this.nota = nota;
     }
+
+    public Aluno() {
+
+    }
+
 
     public long getIdAluno() {
         return idAluno;
